@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Proyectos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* SECCIÓN CANVA */
+        .canva-section {
+            min-height: 100vh;
+            background-image: url('img/fondo2.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .canva-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 1000px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+        }
+
+        .canva-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 900px;
+            line-height: 1.6;
+        }
+
+        .canva-image {
+            width: 90%;
+            max-width: 1200px;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .canva-placeholder {
+            width: 90%;
+            max-width: 1200px;
+            height: 600px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* SECCIÓN ROMPECABEZAS */
+        .puzzle-section {
+            min-height: 100vh;
+            background-image: url('img/fondo2.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+        }
+
+        .puzzle-title {
+            color: #2c2c2c;
+            font-size: 42px;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 260px);
+            grid-template-rows: repeat(2, 260px);
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .puzzle-piece {
+            cursor: pointer;
+            width: 260px;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            border-radius: 10px;
+            overflow: visible;
+        }
+
+        .puzzle-piece:hover img {
+            transform: rotate(-8deg) scale(1.1);
+        }
+
+        .puzzle-piece img {
+            transition: transform 0.3s ease;
+        }
+
+        .puzzle-piece img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #000;
+        }
+
+        .modal-title {
+            font-size: 32px;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .modal-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: #1a1a1a;
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 15px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .placeholder-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 15px;
+            margin: 0 auto;
+        }
+
+        .gallery-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gallery-row .gallery-image {
+            max-width: 240px;
+        }
+
+        .gallery-note {
+            font-size: 14px;
+            color: #1a1a1a;
+            line-height: 1.6;
+            margin: 15px auto;
+            text-align: left;
+            max-width: 500px;
+        }
+
+        .text-intermedio {
+            font-size: 16px;
+            color: #1a1a1a;
+            line-height: 1.6;
+            margin: 25px auto;
+            text-align: center;
+            max-width: 500px;
+            font-weight: 400;
+        }
+
+        .youtube-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ff9a56);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .youtube-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .back-home {
+            padding: 12px 35px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c2c2c;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+
+        .back-home:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .placeholder-puzzle {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* Ajuste específico para la pieza 5 */
+        .puzzle-piece:nth-child(5) img {
+            width: 80%;
+            height: 80%;
+            transform: translateY(-10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .puzzle-piece:nth-child(5):hover img {
+            transform: translateY(-10px) rotate(-8deg) scale(1.1);
+        }
+
+        @media (max-width: 968px) {
+            .canva-title {
+                font-size: 36px;
+            }
+            
+            .canva-subtitle {
+                font-size: 20px;
+            }
+            
+            .puzzle-title {
+                font-size: 32px;
+                margin-bottom: 30px;
+            }
+            
+            .puzzle-container {
+                grid-template-columns: repeat(2, 250px);
+                grid-template-rows: repeat(3, 250px);
+            }
+            
+            .puzzle-piece {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .modal-content {
+                padding: 40px 30px;
+            }
+            
+            .modal-title {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .canva-section {
+                padding: 40px 15px;
+            }
+            
+            .canva-title {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+            
+            .canva-subtitle {
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+            
+            .puzzle-section {
+                padding: 60px 15px;
+            }
+            
+            .puzzle-title {
+                font-size: 26px;
+                margin-bottom: 25px;
+            }
+            
+            .puzzle-container {
+                grid-template-columns: 220px;
+                grid-template-rows: repeat(6, 220px);
+            }
+            
+            .puzzle-piece {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .modal-content {
+                padding: 35px 20px;
+                max-width: 95%;
+            }
+            
+            .modal-title {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .modal-description {
+                font-size: 15px;
+            }
+            
+            .close-modal {
+                font-size: 28px;
+                top: 15px;
+                right: 20px;
+            }
+            
+            .youtube-link {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+            
+            .back-home {
+                padding: 10px 25px;
+                font-size: 15px;
+            }
+            
+            .gallery-row {
+                flex-direction: column;
+            }
+            
+            .gallery-row .gallery-image {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .canva-title {
+                font-size: 24px;
+            }
+            
+            .canva-subtitle {
+                font-size: 16px;
+            }
+            
+            .puzzle-title {
+                font-size: 22px;
+            }
+            
+            .puzzle-container {
+                grid-template-columns: 180px;
+                grid-template-rows: repeat(6, 180px);
+            }
+            
+            .puzzle-piece {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .modal-content {
+                padding: 30px 15px;
+            }
+            
+            .modal-title {
+                font-size: 20px;
+            }
+            
+            .modal-description {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SECCIÓN CANVA -->
+    <div class="canva-section">
+        <h1 class="canva-title">Para armar un rompecabezas conviene empezar por los bordes</h1>
+        <p class="canva-subtitle">Hay que tener la información necesaria a la hora de empezar un nuevo proyecto</p>
+        <img src="img/canva.jpeg" alt="Portada" class="canva-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="canva-placeholder" style="display:none;">
+            CANVA.JPEG<br>
+            (Coloca tu imagen en: img/canva.jpeg)
+        </div>
+    </div>
+
+    <!-- SECCIÓN ROMPECABEZAS -->
+    <div class="puzzle-section">
+        <h1 class="puzzle-title">Seleccioná una de las piezas</h1>
+        
+        <div class="puzzle-container">
+            <!-- FILA 1 -->
+            <!-- Pieza 1 -->
+            <div class="puzzle-piece" onclick="openModal(1)">
+                <img src="img/pieza1.png" alt="Pieza 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-puzzle" style="display:none;">
+                    PIEZA 1<br>(pieza1.png)
+                </div>
+            </div>
+
+            <!-- Pieza 2 -->
+            <div class="puzzle-piece" onclick="openModal(2)">
+                <img src="img/pieza2.png" alt="Pieza 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-puzzle" style="display:none;">
+                    PIEZA 2<br>(pieza2.png)
+                </div>
+            </div>
+
+            <!-- Pieza 3 -->
+            <div class="puzzle-piece" onclick="openModal(3)">
+                <img src="img/pieza3.png" alt="Pieza 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-puzzle" style="display:none;">
+                    PIEZA 3<br>(pieza3.png)
+                </div>
+            </div>
+
+            <!-- FILA 2 -->
+            <!-- Pieza 4 -->
+            <div class="puzzle-piece" onclick="openModal(4)">
+                <img src="img/pieza4.png" alt="Pieza 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-puzzle" style="display:none;">
+                    PIEZA 4<br>(pieza4.png)
+                </div>
+            </div>
+
+            <!-- Pieza 5 -->
+            <div class="puzzle-piece" onclick="openModal(5)">
+                <img src="img/pieza5.png" alt="Pieza 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-puzzle" style="display:none;">
+                    PIEZA 5<br>(pieza5.png)
+                </div>
+            </div>
+
+            <!-- Pieza 6 -->
+            <div class="puzzle-piece" onclick="openModal(6)">
+                <img src="img/pieza6.png" alt="Pieza 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-puzzle" style="display:none;">
+                    PIEZA 6<br>(pieza6.png)
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-home">← Volver al Inicio</a>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <h2 class="modal-title" id="modal-title"></h2>
+            <p class="modal-description" id="modal-description"></p>
+            
+            <div id="modal-video-content" style="display:none;">
+                <img id="modal-image" class="modal-image" style="display:none;" alt="Trabajo">
+                <div id="modal-placeholder" class="placeholder-image">
+                    Imagen del Proyecto
+                </div>
+                <br>
+                <a id="modal-link" href="#" target="_blank" class="youtube-link">▶ Ver en YouTube</a>
+            </div>
+            
+            <div id="modal-gallery-content" class="gallery-container" style="display:none;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const proyectos = [
+            {
+                titulo: "Piezas de colores luminosos",
+                descripcion: "<i>Parecen más sencillas de distinguir, pero pocas cosas son más complejas que armar un sol de cientos de piezas.</i>",
+                imagen: "img/trabajo1.png",
+                youtube: "https://youtu.be/2claPDvYBGw",
+                tipo: "video"
+            },
+            {
+                titulo: "Piezas de formas raras",
+                descripcion: "<i>Son más fáciles de encontrar. Mi recomendación es ubicarlas en la mesa en el lugar que crees que deberían ir. Tarde o temprano van a encontrar su par.</i>",
+                imagen: "img/trabajo2.jpg",
+                youtube: "https://youtu.be/W6S8P_TR6y4",
+                tipo: "video"
+            },
+            {
+                titulo: "Piezas institucionales",
+                descripcion: "<i>La forma clásica, la que encastra a la perfección, hay que tener cuidado de no confundirla con otra de la misma forma. Son parecidas, pero no intercambiables.</i>",
+                imagen: "img/trabajo3.png",
+                youtube: "https://youtu.be/OLk07ptUtLs",
+                tipo: "video"
+            },
+            {
+                titulo: "Piezas de colores oscuros",
+                descripcion: "<i>Hay que prestar atención a los detalles para distinguir donde va cada una. No te dejes engañar por la primera impresión. Hay matices hasta en los fondos negros.</i>",
+                imagen: "img/trabajo4.png",
+                youtube: "https://youtu.be/ocLUH-TCEuQ",
+                tipo: "video"
+            },
+            {
+                titulo: "Piezas que vienen de a dos",
+                descripcion: "<i>A veces la suerte te acompaña y encontras sistemas que resistieron los zarandeos de la caja, ¡aprovechalos!</i><br><br>Campaña publicitaria que vincula la Línea Sarmiento de Trenes Argentinos con Bibliotecas Populares y Municipales aledañas, buscando incorporar la lectura a la rutina de los pasajeros con una simple consigna: #Desviate",
+                imagenes: ["img/desviate1.png", "img/desviate2.png", "img/desviate3.png", "img/desviate4.png"],
+                tipo: "galeria"
+            },
+            {
+                titulo: "Piezas que te desafían",
+                descripcion: "<i>Son esas que no podes dejar de mirar porque no te das cuenta donde van. Esas que te hacen preguntarte si no se habrán equivocado en la fábrica, si no pertenecen a otro rompecabezas. Esas guardalas, las vas a recordar en el momento justo. Pocas cosas son más satisfactorias que cuando las partes se vuelven un todo y al fin entendés cómo debían encajar.</i><br><br>Etapa de fidelización de la campaña #TomarLaNube que buscó la inserción de Fairphone en Argentina. El target son adolescentes de entre 16 y 18 años, que militan la causa ambientalistas.",
+                imagenes: ["img/fairphone1.jpg", "img/fairphone2.png","img/fairphone3.png","img/fairphone4.png"],
+                tipo: "galeria"
+            }
+        ];
+
+        function openModal(numero) {
+            const proyecto = proyectos[numero - 1];
+            document.getElementById('modal-title').textContent = proyecto.titulo;
+            document.getElementById('modal-description').innerHTML = proyecto.descripcion;
+            
+            const videoContent = document.getElementById('modal-video-content');
+            const galleryContent = document.getElementById('modal-gallery-content');
+            
+            if (proyecto.tipo === 'video') {
+                // Mostrar contenido de video
+                videoContent.style.display = 'block';
+                galleryContent.style.display = 'none';
+                
+                document.getElementById('modal-link').href = proyecto.youtube;
+                
+                const img = document.getElementById('modal-image');
+                const placeholder = document.getElementById('modal-placeholder');
+                
+                img.src = proyecto.imagen;
+                img.onerror = function() {
+                    img.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                };
+                img.onload = function() {
+                    img.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+            } else {
+                // Mostrar galería de imágenes
+                videoContent.style.display = 'none';
+                galleryContent.style.display = 'flex';
+                galleryContent.innerHTML = '';
+                
+                // Para la pieza 5, agrupar imágenes 2 y 3 en una fila
+                if (numero === 5) {
+                    // Imagen 1
+                    const img1 = document.createElement('img');
+                    img1.src = proyecto.imagenes[0];
+                    img1.alt = `${proyecto.titulo} 1`;
+                    img1.className = 'gallery-image';
+                    img1.onerror = function() {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'placeholder-image';
+                        placeholder.innerHTML = `Imagen 1<br>(${proyecto.imagenes[0]})`;
+                        galleryContent.replaceChild(placeholder, img1);
+                    };
+                    galleryContent.appendChild(img1);
+                    
+                    // Fila para imágenes 2 y 3
+                    const row = document.createElement('div');
+                    row.className = 'gallery-row';
+                    
+                    const img2 = document.createElement('img');
+                    img2.src = proyecto.imagenes[1];
+                    img2.alt = `${proyecto.titulo} 2`;
+                    img2.className = 'gallery-image';
+                    img2.onerror = function() {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'placeholder-image';
+                        placeholder.style.maxWidth = '240px';
+                        placeholder.innerHTML = `Imagen 2<br>(${proyecto.imagenes[1]})`;
+                        row.replaceChild(placeholder, img2);
+                    };
+                    
+                    const img3 = document.createElement('img');
+                    img3.src = proyecto.imagenes[2];
+                    img3.alt = `${proyecto.titulo} 3`;
+                    img3.className = 'gallery-image';
+                    img3.onerror = function() {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'placeholder-image';
+                        placeholder.style.maxWidth = '240px';
+                        placeholder.innerHTML = `Imagen 3<br>(${proyecto.imagenes[2]})`;
+                        row.replaceChild(placeholder, img3);
+                    };
+                    
+                    row.appendChild(img2);
+                    row.appendChild(img3);
+                    galleryContent.appendChild(row);
+                    
+                    // Imagen 4
+                    const img4 = document.createElement('img');
+                    img4.src = proyecto.imagenes[3];
+                    img4.alt = `${proyecto.titulo} 4`;
+                    img4.className = 'gallery-image';
+                    img4.onerror = function() {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'placeholder-image';
+                        placeholder.innerHTML = `Imagen 4<br>(${proyecto.imagenes[3]})`;
+                        galleryContent.replaceChild(placeholder, img4);
+                    };
+                    galleryContent.appendChild(img4);
+                } else {
+                    // Para otras galerías, mostrar normalmente
+                    proyecto.imagenes.forEach((imgSrc, index) => {
+                        const img = document.createElement('img');
+                        img.src = imgSrc;
+                        img.alt = `${proyecto.titulo} ${index + 1}`;
+                        img.className = 'gallery-image';
+                        img.onerror = function() {
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'placeholder-image';
+                            placeholder.innerHTML = `Imagen ${index + 1}<br>(${imgSrc})`;
+                            galleryContent.replaceChild(placeholder, img);
+                        };
+                        galleryContent.appendChild(img);
+                        
+                        // Si es la pieza 6 y es la primera imagen, agregar texto intermedio
+                        if (numero === 6 && index === 0) {
+                            const textoDiv = document.createElement('div');
+                            textoDiv.className = 'text-intermedio';
+                            textoDiv.textContent = 'Cartel a ubicar en las afueras de los colegios más progresistas de la ciudad, públicos como el Pellegrini y el Nacional de BA, y privados no religiosos.';
+                            galleryContent.appendChild(textoDiv);
+                        }
+                    });
+                }
+            }
+            
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Cerrar modal clickeando fuera
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

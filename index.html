@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Futura', 'Century Gothic', 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* SECCIÓN 1 - FONDO 1 */
+        .section-one {
+            min-height: 100vh;
+            background-image: url('img/fondo1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .title {
+            font-family: 'Futura', 'Century Gothic', 'Arial Black', sans-serif;
+            font-size: 48px;
+            color: #2c2c2c;
+            margin-bottom: 60px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .caja-image {
+            width: 70%;
+            max-width: 700px;
+            height: auto;
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* SECCIÓN 2 - FONDO 2 */
+        .section-two {
+            min-height: 100vh;
+            background-image: url('img/fondo2.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            max-width: 1400px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .text-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .description-text {
+            font-size: 18px;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .description-text p {
+            margin-bottom: 18px;
+        }
+
+        .cta-box {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .cta-text {
+            font-family: 'Futura', 'Century Gothic', 'Arial Black', sans-serif;
+            font-size: 24px;
+            color: #1a1a1a;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .arrow-text {
+            font-size: 28px;
+            color: #1a1a1a;
+            font-weight: bold;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .caja2-link {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
+        }
+
+        .caja2-image {
+            width: 350px;
+            height: auto;
+            transition: all 0.4s ease;
+        }
+
+        .caja2-link:hover .caja2-image {
+            transform: scale(1.12) rotate(-3deg);
+            filter: brightness(1.1);
+        }
+
+        .caja2-link:active .caja2-image {
+            transform: scale(0.98);
+        }
+
+        /* Placeholders */
+        .placeholder-box {
+            background: rgba(150, 150, 150, 0.5);
+            border: 3px dashed #666;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .caja-placeholder {
+            width: 70%;
+            max-width: 700px;
+            height: 500px;
+        }
+
+        .caja2-placeholder {
+            width: 350px;
+            height: 350px;
+        }
+
+        /* SECCIÓN 3 - EJEMPLOS Y CONTACTO */
+        .section-three {
+            min-height: 100vh;
+            background-image: url('img/fondo2.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 80px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .examples-title {
+            font-family: 'Futura', 'Century Gothic', 'Arial Black', sans-serif;
+            font-size: 48px;
+            color: #2c2c2c;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .ultima-pieza-video {
+            width: 400px;
+            max-width: 90%;
+            border-radius: 15px;
+            margin: 0 auto 60px;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .examples-grid {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .example-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .example-image {
+            width: 350px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .example-caption {
+            font-family: 'Futura', 'Century Gothic', 'Arial', sans-serif;
+            font-size: 20px;
+            color: #2c2c2c;
+            font-weight: 600;
+        }
+
+        .contact-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .yo-image {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .contact-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .contact-title {
+            font-family: 'Futura', 'Century Gothic', 'Arial', sans-serif;
+            font-size: 24px;
+            color: #2c2c2c;
+            font-weight: 400;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 30px;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.15);
+        }
+
+        .placeholder-example {
+            width: 350px;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .placeholder-yo {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .placeholder-social {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+
+            .caja-image {
+                width: 85%;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+            
+            .description-text {
+                text-align: center;
+                font-size: 16px;
+            }
+
+            .description-text p {
+                margin-bottom: 15px;
+            }
+
+            .cta-text {
+                font-size: 20px;
+            }
+
+            .caja2-image {
+                width: 280px;
+            }
+
+            .examples-title {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+
+            .ultima-pieza-video {
+                width: 320px;
+                margin-bottom: 40px;
+            }
+
+            .examples-grid {
+                gap: 40px;
+                margin-bottom: 60px;
+            }
+
+            .example-image {
+                width: 280px;
+            }
+
+            .example-caption {
+                font-size: 18px;
+            }
+
+            .yo-image {
+                width: 250px;
+            }
+
+            .contact-title {
+                font-size: 20px;
+                text-align: center;
+            }
+
+            .social-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .examples-grid, .contact-section {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 24px;
+                letter-spacing: 1px;
+            }
+
+            .description-text {
+                font-size: 14px;
+            }
+
+            .cta-text {
+                font-size: 18px;
+            }
+
+            .caja2-image {
+                width: 240px;
+            }
+
+            .examples-title {
+                font-size: 24px;
+            }
+
+            .ultima-pieza-video {
+                width: 280px;
+            }
+
+            .example-image {
+                width: 240px;
+            }
+
+            .yo-image {
+                width: 200px;
+            }
+
+            .contact-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SECCIÓN 1 -->
+    <div class="section-one">
+        <h1 class="title">Mi Portfolio</h1>
+        <img src="img/caja1.png" alt="Caja" class="caja-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="placeholder-box caja-placeholder" style="display:none;">
+            CAJA1.PNG<br>
+            (Coloca tu imagen en: img/caja1.png)
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2 -->
+    <div class="section-two">
+        <div class="content-wrapper">
+            <div class="text-content">
+                <div class="description-text">
+                    <p>1.000, 3.000, 5.000 piezas. Todas diferentes, todas necesarias.</p>
+                    <p>Su belleza está en el detalle y en el todo, se complementan hasta formar el cuadro completo.</p>
+                    <p>Armarlo demanda paciencia y dedicación. Momentos de disfrute y satisfacción. Momentos de aburrimiento y frustración.</p>
+                    <p>Aprender a enriquecerse con cada etapa y apreciar que cada parte necesita estar completa para que el conjunto sea perfecto.</p>
+                    <p>Cómo en un equipo, hay que saber identificar quién es quién y donde encaja mejor, que colores van juntos y que antagónicos se complementan.</p>
+                    <p>Liderar es armar un conjunto que se retroalimenta y encuentra en el resultado la razón de ser de cada pieza.</p>
+                   
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <p class="cta-text">Acompáñame a armar mi rompecabezas</p>
+                <p class="arrow-text">↓</p>
+                <a href="rompecabezas.html" class="caja2-link">
+                    <img src="img/caja2.png" alt="Caja 2" class="caja2-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="placeholder-box caja2-placeholder" style="display:none;">
+                        CAJA2.PNG<br>
+                        (Coloca tu imagen en: img/caja2.png)
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 3 - EJEMPLOS Y CONTACTO -->
+    <div class="section-three">
+        <h2 class="examples-title">Y ahora solo queda poner la última pieza</h2>
+        
+        <video class="ultima-pieza-video" autoplay loop muted playsinline>
+            <source src="img/ultimapieza.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+        
+        <div class="examples-grid">
+            <div class="example-item">
+                <img src="img/puzzle1.png" alt="Puzzle 1" class="example-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-example" style="display:none;">
+                    PUZZLE1.PNG
+                </div>
+                <p class="example-caption">6,000 piezas</p>
+            </div>
+
+            <div class="example-item">
+                <img src="img/puzzle2.png" alt="Puzzle 2" class="example-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="placeholder-example" style="display:none;">
+                    PUZZLE2.PNG
+                </div>
+                <p class="example-caption">3,000 piezas</p>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <img src="img/yo.png" alt="Yo" class="yo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="placeholder-yo" style="display:none;">
+                YO.PNG
+            </div>
+
+            <div class="contact-box">
+                <h3 class="contact-title">Contactame<br>y elijamos que próximo desafío vamos a armar juntos</h3>
+                <div class="social-icons">
+                    <a href="https://wa.me/+542915227812" target="_blank">
+                        <img src="img/wp.png" alt="WhatsApp" class="social-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-social" style="display:none;">WP</div>
+                    </a>
+                    <a href="https://www.instagram.com/sofi_pl4/" target="_blank">
+                        <img src="img/ins.png" alt="Instagram" class="social-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-social" style="display:none;">IG</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
